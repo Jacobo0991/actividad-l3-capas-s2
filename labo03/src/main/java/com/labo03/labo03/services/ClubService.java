@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClubService {
@@ -16,5 +17,14 @@ public class ClubService {
     public List<Club> getClubsByTitlesGreaterThanEqual(int titles) {
         List<Club> clubs = clubRepository.getClubsByTitlesGreaterThanEqual(titles);
         return clubs;
+    }
+
+    public Club deleteClub(Long id) {
+        Optional<Club> club = clubRepository.findById(id);
+        if (club.isEmpty()) {
+            return null;
+        }
+        clubRepository.deleteById(id);
+        return club.get();
     }
 }
