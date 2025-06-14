@@ -18,12 +18,12 @@ public class ClubController {
     @Autowired
     private ClubService clubService;
 
-    @GetMapping
+    @GetMapping("/search")
     public ResponseEntity<List<Club>> getClubsByTitles(@RequestParam int titles) {
         return ResponseEntity.ok(clubService.getClubsByTitlesGreaterThanEqual(titles));
     }
 
-    @DeleteMapping("/search/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Club> deleteClub(@PathVariable Long id) {
         Club club = clubService.deleteClub(id);
         if (club != null) {
